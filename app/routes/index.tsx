@@ -62,8 +62,7 @@ export default {
     app.delete('/todo/:id', async (c) => {
       const id = c.req.param('id')
       await c.env.DB.prepare(`DELETE FROM todo WHERE id = ?;`).bind(id).run()
-      c.status(200)
-      return c.body(null)
+      return c.body(null, 200)
     })
   }
 } satisfies Route<{ Bindings: Bindings }>
