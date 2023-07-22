@@ -1,6 +1,10 @@
 name = "todo"
 compatibility_date = "2023-01-01"
 
+[build]
+command = "vite build --ssr ./_worker.ts"
+watch_dir = "app"
+
 [[d1_databases]]
 binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "todo"

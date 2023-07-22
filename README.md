@@ -2,8 +2,7 @@
 
 Stack:
 
-* Hono
-* JSX (Hono middleware)
+* Sonik
 * htmx
 * Zod
 * Cloudflare Workers
