@@ -1,8 +1,8 @@
-import { Hono } from 'hono/quick'
+import { Hono } from 'hono'
 import { z } from 'zod'
 import { zValidator } from '@hono/zod-validator'
 
-import { Layout, AddTodo, Item } from './components'
+import { renderer, AddTodo, Item } from './components'
 
 type Bindings = {
   DB: D1Database
@@ -15,17 +15,19 @@ type Todo = {
 
 const app = new Hono<{ Bindings: Bindings }>()
 
+app.get('*', renderer)
+
 app.get('/', async (c) => {
   const { results } = await c.env.DB.prepare(`SELECT id, title FROM todo;`).all<Todo>()
-  const todos = results as unknown as Todo[] // Currently, should fix a type mismatch.
-  return c.html(
-    <Layout>
+  const todos = results
+  return c.render(
+    <div>
       <AddTodo />
       {todos.map((todo) => {
         return <Item title={todo.title} id={todo.id} />
       })}
       <div id="todo"></div>
-    </Layout>
+    </div>
   )
 })
 

@@ -20,7 +20,7 @@ npm install
 Setup:
 
 ```
-wrangler d1 create todo --experimental-backend
+wrangler d1 create todo
 wrangler d1 execute todo --local --file=todo.sql
 ```
 
